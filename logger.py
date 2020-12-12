@@ -6,7 +6,7 @@ conn = krpc.connect(name = "logger")
 vessel = conn.space_center.active_vessel
 frame = vessel.orbit.body.reference_frame
 
-f = open("shuttleAbort.csv", "w")
+f = open("asteroidLand.csv", "w")
 csvwriter = csv.writer(f)
 
 met = conn.add_stream(getattr, vessel, 'met')
