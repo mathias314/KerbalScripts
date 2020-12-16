@@ -25,18 +25,13 @@ fields = ['time', 'altitude', 'latitude', 'longitude', 'atmosphereDensity',
 
 csvwriter.writerow(fields)
 
-speed = 0
 acceleration = 0
 jerk = 0
 gForce = 0
 
-i = 0
+epsilon = .0000000000001
 
-while met() == 0:
-    pass
-
-row = [met(), altitude(), latitude(), longitude(), atmosphereDensity(), dynamicPressure(), totalAirTemp(), staticAirTemp(),
-speed, acceleration, jerk, gForce]
+i = 1
 
 while True:
     oldSpeed = speed
@@ -46,8 +41,8 @@ while True:
     time.sleep(1)
 
     speed = vessel.flight(frame).speed
-    acceleration = (speed - oldSpeed) / (met() - oldTime) #causes problems if the craft has slight movement on the pad
-    jerk = (acceleration - oldAccel) / (met() - oldTime) #have to add epsilon to prevent divide from 0 error when on pad
+    acceleration = (speed - oldSpeed) / (met() - oldTime + epsilon) #causes problems if the craft has slight movement on the pad
+    jerk = (acceleration - oldAccel) / (met() - oldTime + epsilon) #have to add epsilon to prevent divide from 0 error when on pad
     gForce = acceleration / 9.81
 
     row = [met(), altitude(), latitude(), longitude(), atmosphereDensity(), dynamicPressure(), totalAirTemp(), staticAirTemp(),
