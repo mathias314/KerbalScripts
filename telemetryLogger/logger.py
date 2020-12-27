@@ -28,6 +28,7 @@ csvwriter.writerow(fields)
 acceleration = 0
 jerk = 0
 gForce = 0
+speed = 0
 
 epsilon = .0000000000001
 
